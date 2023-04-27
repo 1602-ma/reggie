@@ -1,6 +1,7 @@
 package com.feng.reggie.config;
 
 import com.alibaba.fastjson.JSON;
+import com.feng.reggie.common.BaseContext;
 import com.feng.reggie.common.Response.R;
 import com.feng.reggie.pojo.po.Employee;
 import lombok.extern.slf4j.Slf4j;
@@ -53,6 +54,8 @@ public class LoginCheckFilter implements Filter {
         // 4.判断登录状态，如果已经登录，则直接放行
         if (((HttpServletRequest) request).getSession().getAttribute("employee") != null) {
             log.info("用户已经登录，id为:{}", ((HttpServletRequest) request).getSession().getAttribute("employee"));
+            Long empId = (Long)((HttpServletRequest) request).getSession().getAttribute("employee");
+            BaseContext.setCurrentId(empId);
             chain.doFilter(request, response);
             return;
         }
