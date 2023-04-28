@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author f
@@ -50,5 +51,15 @@ public class CategoryController {
     public R<String> update(@RequestBody Category category) {
         categoryService.updateById(category);
         return R.success("分类修改成功");
+    }
+
+    @GetMapping("list")
+    public R<List<Category>> list(Category category) {
+        LambdaQueryWrapper<Category> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(null != category.getType(), Category::getType, category.getType())
+                .orderByAsc(Category::getSort)
+                .orderByAsc(Category::getUpdateTime);
+        List<Category> list = categoryService.list(lambdaQueryWrapper);
+        return R.success(list);
     }
 }
