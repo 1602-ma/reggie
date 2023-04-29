@@ -2,48 +2,68 @@ package com.feng.reggie.pojo.po;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
  * @author f
- * @date 2023/4/25 21:52
+ * @date 2023/4/27 23:12
  */
 @Data
-@TableName(value = "employee")
-public class Employee {
+public class SetMeal implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
 
-    private String username;
 
+    /** 分类id */
+    private Long categoryId;
+
+
+    /** 套餐名称 */
     private String name;
 
-    private String password;
 
-    private String phone;
+    /** 套餐价格 */
+    private BigDecimal price;
 
-    private String sex;
 
-    /** 身份证号码 */
-    private String idNumber;
-
+    /** 状态 0:停用 1:启用 */
     private Integer status;
+
+
+    /** 编码 */
+    private String code;
+
+
+    /** 描述信息 */
+    private String description;
+
+
+    /** 图片 */
+    private String image;
+
 
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
+
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
+
 
     @TableField(fill = FieldFill.INSERT)
     private Long createUser;
 
+
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Long updateUser;
 
+
+    /** 是否删除 */
+    private Integer isDeleted;
 }
