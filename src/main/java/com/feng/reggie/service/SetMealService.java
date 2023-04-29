@@ -1,7 +1,9 @@
 package com.feng.reggie.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.feng.reggie.pojo.dto.SetMealDto;
 import com.feng.reggie.pojo.po.SetMeal;
+import com.feng.reggie.pojo.po.SetMealDish;
 
 /**
  * @author f
@@ -9,4 +11,22 @@ import com.feng.reggie.pojo.po.SetMeal;
  */
 public interface SetMealService extends IService<SetMeal> {
 
+    /**
+     * save
+     * @param setMealDto dto
+     */
+    void saveWithDish(SetMealDto setMealDto);
+
+    /**
+     * get
+     * @param id id
+     * @return   dto
+     */
+    SetMealDto getByIdWithDish(Long id);
+
+    /**
+     * update
+     * @param setMealDto dto
+     */
+    void updateWithDish(SetMealDto setMealDto);
 }
